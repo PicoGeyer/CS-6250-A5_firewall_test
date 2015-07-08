@@ -53,7 +53,7 @@ def block_east_west_port_1080(mn):
 
 def block_e1_to_w1_completely(mn):
     print "***********************************************************************************"
-    print "TEST: 'Block e1 from communicating with w1 competely in both directions'"
+    print "TEST: 'Block e1 from communicating with w1 completely in both directions'"
     print "***********************************************************************************"
 
     # Pick 20 random numbers between port 1024 and 10000
@@ -84,7 +84,7 @@ def block_e1_to_w1_completely(mn):
 
 def block_e2_to_w2_over_2000(mn):
     print "***********************************************************************************"
-    print "TEST: 'Block e2 from coummincating with w2 over ports 2000-2004 in both directions'"
+    print "TEST: 'Block e2 from communicating with w2 over ports 2000-2004 in both directions'"
     print "***********************************************************************************"
 
     failed = False
@@ -108,14 +108,14 @@ def block_e2_to_w2_over_2000(mn):
             print 'PASS: Connection refused from client ({}) to server ({}) on port ({})'.format('w2', 'e2', port)
 
     if failed:
-        raise TestFailure("FAILED 'Block e2 from coummincating with w2 over ports 2000-2004 in both directions'")
+        raise TestFailure("FAILED 'Block e2 from communicating with w2 over ports 2000-2004 in both directions'")
     else:
-        print "PASSED: 'Block e2 from coummincating with w2 over ports 2000-2004 in both directions'"
+        print "PASSED: 'Block e2 from communicating with w2 over ports 2000-2004 in both directions'"
 
 
 def allow_traffic_within_east_west(mn):
     print "***********************************************************************************"
-    print "TEST: 'Allow all traffice within the East or West sites to port 1080'"
+    print "TEST: 'Allow all traffic within the East or West sites to port 1080'"
     print "***********************************************************************************"
     failed = False
 
@@ -151,7 +151,7 @@ def allow_traffic_within_east_west(mn):
 
 def block_e3_to_w3_over_3000(mn):
     print "***********************************************************************************"
-    print "TEST: 'Block e3 from coummincating with w3 over ports 3000-3002'"
+    print "TEST: 'Block e3 from communicating with w3 over ports 3000-3002'"
     print "***********************************************************************************"
 
     failed = False
@@ -175,9 +175,9 @@ def block_e3_to_w3_over_3000(mn):
             print 'FAIL: Connection refused from client ({}) to server ({}) on port ({})'.format('w3', 'e3', port)
 
     if failed:
-        raise TestFailure("FAILED 'Block e3 from coummincating with w3 over ports 3000-3002'")
+        raise TestFailure("FAILED 'Block e3 from communicating with w3 over ports 3000-3002'")
     else:
-        print "PASSED: 'Block e3 from coummincating with w3 over ports 3000-3002'"
+        print "PASSED: 'Block e3 from communicating with w3 over ports 3000-3002'"
 
 def testconnection(mn, server, client, port):
 
