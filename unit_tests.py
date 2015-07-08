@@ -40,8 +40,8 @@ def block_east_west_port_1080(mn):
                 failed = True
                 print '!!! Connection established from client ({}) to server ({}:{})'.format(eIP, wIP, 1080)
             else:
-                print 'edata:', edata
-                print 'wdata:', wdata
+                #print 'edata:', edata
+                #print 'wdata:', wdata
                 pass
             #print 'edata:', edata
     if failed:
