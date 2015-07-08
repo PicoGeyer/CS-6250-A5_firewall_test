@@ -145,9 +145,9 @@ def allow_traffic_within_east_west(mn):
                     print 'FAIL: Connection could not be established from client ({}) to server ({}) on port ({})'.format(w1, w, port)
 
     if failed:
-        raise TestFailure("FAILED: 'Block all traffic in both directions between the East and West on port 1080'")
+        raise TestFailure("FAILED: 'Allow all traffic within the East or West sites to port 1080'")
     else:
-        print "PASSED: 'Block all traffic in both directions between the East and West on port 1080'"
+        print "PASSED: 'Allow all traffic within the East or West sites to port 1080'"
 
 def block_e3_to_w3_over_3000(mn):
     print "***********************************************************************************"
