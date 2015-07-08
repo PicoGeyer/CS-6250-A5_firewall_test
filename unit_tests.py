@@ -1,13 +1,18 @@
 #Author Pico Geyer
+#Contributors:
+# Robert Moe
 
 import time
 import re
 import random
+import os.path
 
 class SetupError(Exception): pass
 class TestFailure(Exception): pass
 
 required_hosts = ['e1', 'e2', 'e3', 'w1', 'w2', 'w3']
+
+tools_path=''
 
 #Implementation of tests.
 #Each test should clean up after itself so as not to affect the other tests
@@ -183,11 +188,19 @@ def testconnection(mn, server, client, port):
     server_IP = server_host.IP()
 
     print 'Starting server ({}) on {}:{}'.format(server, server_IP, port)
-    server_host.sendCmd('python test-server.py {} {}'.format(server_IP, int(port)), printPid=True)
+    server_host.sendCmd('python {} {} {}'.format(
+        os.path.join(tools_path, 'test-server.py'),
+        server_IP,
+        int(port)),
+        printPid=True)
     time.sleep(1)
 
     print 'Starting client ({}) connecting to {}:{}'.format(client, server_IP, port)
-    client_host.sendCmd('python test-client.py {} {}'.format(server_IP, int(port)), printPid=True)
+    client_host.sendCmd('python {} {} {}'.format(
+        os.path.join(tools_path, 'test-client.py'),
+        server_IP,
+        int(port)),
+        printPid=True)
     time.sleep(1)
 
     client_host.sendInt()
@@ -211,7 +224,18 @@ def check_hosts(mn):
             print 'Required host {} seems to be missing from the topology'.format(r)
             missing_host = True
     if missing_host:
-        raise SetupError("Missing hosts") 
+        raise SetupError("Missing hosts")
+
+def check_setup():
+    #Make sure we can find our tools
+    global tools_path
+    #first check for tools in current dir
+    if os.path.exists('test-client.py'):
+        tools_path=os.path.abspath('.')
+    elif os.path.exists('../test-client.py'):
+        tools_path=os.path.abspath('..')
+    else:
+        raise SetupError('Can\'t find testing tools')
 
 def run_tests(mn):
     #list of tests to run, edit as needed
@@ -220,8 +244,9 @@ def run_tests(mn):
              'allow_traffic_within_east_west',
              'block_e2_to_w2_over_2000',
              'block_e3_to_w3_over_3000']
-    #first do a sanity check 
+    #first do a sanity check
     check_hosts(mn)
+    check_setup()
     mn.pingAll()
     for t in tests:
         to = globals()[t]
