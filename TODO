@@ -1,0 +1,5 @@
+Add test for handling all config options (Kimberly Dorn attached)
+Make output a little less verbose
+Reduce number of random port testing from 20 to 7 (make it configurable if more are needed)
+Colorize Fail messages (so they are easy to spot)
+Have a pass/fail summary at the end
